@@ -1,5 +1,6 @@
 package br.com.joaotadeu.mantis.tests;
 
+import br.com.joaotadeu.mantis.DriverFactory.DriverFactory;
 import br.com.joaotadeu.mantis.pages.MantisAreaLogadaPage;
 import br.com.joaotadeu.mantis.pages.MantisLoginPage;
 import br.com.joaotadeu.mantis.util.TestReport;
@@ -20,8 +21,7 @@ public class MantisLoginTest {
 
     @BeforeEach
     void setUp() {
-        WebDriverManager.firefoxdriver().setup();
-        navegador = new FirefoxDriver();
+        navegador = DriverFactory.getDriver();
         navegador.manage().window().maximize();
         mantisLoginPage = new MantisLoginPage(navegador);
         mantisAreaLogadaPage = new MantisAreaLogadaPage(navegador);
@@ -30,10 +30,7 @@ public class MantisLoginTest {
 
     @AfterEach
     void tearDown() {
-        mantisAreaLogadaPage.tirarPrint();
-        if (navegador != null) {
-            navegador.quit();
-        }
+        DriverFactory.killDriver();
         testReport.close();
     }
 
@@ -74,5 +71,6 @@ public class MantisLoginTest {
         mantisAreaLogadaPage.uploadArquivo("/Users/joaotadeu/Documents/Workspace/Java/teste-tecnico/evidencias/img.png");
         mantisAreaLogadaPage.selecionarVisibilidade("privado");
         mantisAreaLogadaPage.criaNovaTarefa();
+
     }
 }
