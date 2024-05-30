@@ -137,7 +137,7 @@ public class MantisAreaLogadaPage {
         botaoCriarNovaTarefa.click();
     }
 
-    // Método para tirar uma captura de tela e armazenar em uma pasta
+    // tirar uma captura de tela e armazenar em uma pasta
     public void tirarPrint() {
         if (navegador != null) {
             try {

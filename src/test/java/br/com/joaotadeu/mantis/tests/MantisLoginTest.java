@@ -2,6 +2,7 @@ package br.com.joaotadeu.mantis.tests;
 
 import br.com.joaotadeu.mantis.pages.MantisAreaLogadaPage;
 import br.com.joaotadeu.mantis.pages.MantisLoginPage;
+import br.com.joaotadeu.mantis.util.TestReport;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
@@ -15,6 +16,7 @@ public class MantisLoginTest {
     private WebDriver navegador;
     private MantisLoginPage mantisLoginPage;
     private MantisAreaLogadaPage mantisAreaLogadaPage;
+    private TestReport testReport;
 
     @BeforeEach
     void setUp() {
@@ -23,6 +25,7 @@ public class MantisLoginTest {
         navegador.manage().window().maximize();
         mantisLoginPage = new MantisLoginPage(navegador);
         mantisAreaLogadaPage = new MantisAreaLogadaPage(navegador);
+        testReport = new TestReport("evidencias/test-report.html");
     }
 
     @AfterEach
@@ -31,6 +34,7 @@ public class MantisLoginTest {
         if (navegador != null) {
             navegador.quit();
         }
+        testReport.close();
     }
 
     @Test
