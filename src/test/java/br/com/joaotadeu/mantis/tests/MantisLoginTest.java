@@ -1,5 +1,6 @@
 package br.com.joaotadeu.mantis.tests;
 
+import br.com.joaotadeu.mantis.pages.MantisAreaLogadaPage;
 import br.com.joaotadeu.mantis.pages.MantisLoginPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
@@ -7,12 +8,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
 @DisplayName("Testes Automatizados da Funcionalidade Login")
 public class MantisLoginTest {
 
     private WebDriver navegador;
     private MantisLoginPage mantisLoginPage;
+    private MantisAreaLogadaPage mantisAreaLogadaPage;
 
     @BeforeEach
     void setUp() {
@@ -20,6 +23,7 @@ public class MantisLoginTest {
         navegador = new FirefoxDriver();
         navegador.manage().window().maximize();
         mantisLoginPage = new MantisLoginPage(navegador);
+        mantisAreaLogadaPage = new MantisAreaLogadaPage(navegador);
     }
 
     @AfterEach
@@ -43,10 +47,17 @@ public class MantisLoginTest {
         mantisLoginPage.preencherCampoUsuario("Joao_Pereira");
         mantisLoginPage.clicarNoBotaoEntrar();
         mantisLoginPage.preencherCampoSenha("1234qwer");
-        mantisLoginPage.clicarNoBotaoLogar();
+        mantisLoginPage.clicarNoBotaoEntrar();
 
         // Verifica se o login foi bem-sucedido
         WebElement dashboard = mantisLoginPage.waitForElementVisibility(By.id("main-container"));
         Assertions.assertTrue(dashboard.isDisplayed(), "O login não foi bem-sucedido.");
+
+        // Criação de tarefa
+        mantisAreaLogadaPage.clicarBotaoCriarTarefa();
+        mantisAreaLogadaPage.selecionarCategoria("[Todos os Projetos] categoria teste");
+        mantisAreaLogadaPage.selecionarReprodutibilidade("sempre");
+        mantisAreaLogadaPage.selecionarSeveridade("grande");
+        mantisAreaLogadaPage.selecionarPrioridade("alta");
     }
 }
