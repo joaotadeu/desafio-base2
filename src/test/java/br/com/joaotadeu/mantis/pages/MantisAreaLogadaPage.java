@@ -1,6 +1,7 @@
 package br.com.joaotadeu.mantis.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,8 +12,10 @@ import java.time.Duration;
 
 public class MantisAreaLogadaPage {
     private final WebDriverWait wait;
+    private final WebDriver navegador;
 
     public MantisAreaLogadaPage(WebDriver navegador) {
+        this.navegador = navegador;
         this.wait = new WebDriverWait(navegador, Duration.ofSeconds(10));
     }
 
@@ -55,5 +58,59 @@ public class MantisAreaLogadaPage {
         select.selectByVisibleText(prioridade);
     }
 
+    // selecionar uma opção de marcador
+    public void selecionarMarcador(String marcador) {
+        WebElement selectElement = waitForElementVisibility(By.id("tag_select"));
+        Select select = new Select(selectElement);
+        select.selectByVisibleText(marcador);
+    }
+
+    // preencher o campo de entrada "Platform"
+    public void preencherPlatform(String plataforma) {
+        WebElement campoPlatform = waitForElementVisibility(By.id("platform"));
+        campoPlatform.sendKeys(plataforma);
+    }
+
+    public void preencherSO(String so) {
+        WebElement campoSO = waitForElementVisibility(By.id("os"));
+        campoSO.sendKeys((so));
+    }
+
+    public void preencherVersao(String version) {
+        WebElement campoVersao = waitForElementVisibility(By.id("os_build"));
+        campoVersao.sendKeys(version);
+    }
+
+    public void preencherResumo(String resumo) {
+        WebElement campoResumo = waitForElementVisibility(By.id("summary"));
+        campoResumo.sendKeys(resumo);
+    }
+
+    public void preencherDescricao(String descricao) {
+        WebElement campoDescricao = waitForElementVisibility(By.id("summary"));
+        campoDescricao.sendKeys(descricao);
+    }
+
+    public  void preencherPassosReproduzir(String passos){
+        WebElement campoPassos = waitForElementVisibility(By.id("steps_to_reproduce"));
+        campoPassos.sendKeys(passos);
+    }
+
+    public void preencherDadosAdicionais(String dadosAdicionais){
+        WebElement campoDadosAdicionais = waitForElementVisibility(By.id("additional_info"));
+        campoDadosAdicionais.sendKeys(dadosAdicionais);
+    }
+
+    public void uploadArquivo(String caminhoArquivo) {
+        WebElement dropzone = waitForElementVisibility(By.cssSelector("div.dropzone"));
+        WebElement inputFile = dropzone.findElement(By.cssSelector("input[type='file']"));
+
+        // Usar JavaScript para remover o atributo "hidden" se necessário
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) navegador;
+        jsExecutor.executeScript("arguments[0].style.display = 'block';", inputFile);
+
+        // Enviar o caminho do arquivo para o campo de upload
+        inputFile.sendKeys(caminhoArquivo);
+    }
 
 }
