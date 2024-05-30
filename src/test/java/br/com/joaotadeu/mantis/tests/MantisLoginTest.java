@@ -4,12 +4,11 @@ import br.com.joaotadeu.mantis.DriverFactory.DriverFactory;
 import br.com.joaotadeu.mantis.pages.MantisAreaLogadaPage;
 import br.com.joaotadeu.mantis.pages.MantisLoginPage;
 import br.com.joaotadeu.mantis.util.TestReport;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
+
 
 @DisplayName("Testes Automatizados da Funcionalidade Login")
 public class MantisLoginTest {
