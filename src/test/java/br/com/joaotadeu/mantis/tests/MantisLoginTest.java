@@ -9,8 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import java.nio.file.Paths;
-
 @DisplayName("Testes Automatizados da Funcionalidade Login")
 public class MantisLoginTest {
 
@@ -68,8 +66,6 @@ public class MantisLoginTest {
         mantisAreaLogadaPage.preencherDescricao("Ao efetuar tentativa de validação é retornado erro");
         mantisAreaLogadaPage.preencherPassosReproduzir("Seguir o template de execução");
         mantisAreaLogadaPage.preencherDadosAdicionais("Poderia priorizar?");
-
-        String caminhoArquivo = Paths.get("/Users/joaotadeu/Documents/Workspace/Java/teste-tecnico/evidencias/img.png").toAbsolutePath().toString();
-        mantisAreaLogadaPage.uploadArquivo(caminhoArquivo);
+        mantisAreaLogadaPage.uploadArquivo("/Users/joaotadeu/Documents/Workspace/Java/teste-tecnico/evidencias/img.png");
     }
 }

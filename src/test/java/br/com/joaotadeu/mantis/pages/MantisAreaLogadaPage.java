@@ -1,7 +1,6 @@
 package br.com.joaotadeu.mantis.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -101,16 +100,9 @@ public class MantisAreaLogadaPage {
         campoDadosAdicionais.sendKeys(dadosAdicionais);
     }
 
+    // upload de um arquivo
     public void uploadArquivo(String caminhoArquivo) {
-        WebElement dropzone = waitForElementVisibility(By.cssSelector("div.dropzone"));
-        WebElement inputFile = dropzone.findElement(By.cssSelector("input[type='file']"));
-
-        // Usar JavaScript para remover o atributo "hidden" se necessário
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) navegador;
-        jsExecutor.executeScript("arguments[0].style.display = 'block';", inputFile);
-
-        // Enviar o caminho do arquivo para o campo de upload
+        WebElement inputFile = navegador.findElement(By.cssSelector("input[type='file'].dz-hidden-input"));
         inputFile.sendKeys(caminhoArquivo);
     }
-
 }
