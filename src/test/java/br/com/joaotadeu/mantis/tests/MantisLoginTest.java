@@ -27,6 +27,7 @@ public class MantisLoginTest {
 
     @AfterEach
     void tearDown() {
+        mantisAreaLogadaPage.tirarPrint();
         if (navegador != null) {
             navegador.quit();
         }
@@ -67,5 +68,7 @@ public class MantisLoginTest {
         mantisAreaLogadaPage.preencherPassosReproduzir("Seguir o template de execução");
         mantisAreaLogadaPage.preencherDadosAdicionais("Poderia priorizar?");
         mantisAreaLogadaPage.uploadArquivo("/Users/joaotadeu/Documents/Workspace/Java/teste-tecnico/evidencias/img.png");
+        mantisAreaLogadaPage.selecionarVisibilidade("privado");
+        mantisAreaLogadaPage.criaNovaTarefa();
     }
 }
