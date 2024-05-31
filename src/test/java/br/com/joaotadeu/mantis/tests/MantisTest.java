@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 
-@DisplayName("Testes Automatizados da Funcionalidade Login")
+@DisplayName("Testes Automatizados")
 public class MantisTest {
 
     private WebDriver navegador;
